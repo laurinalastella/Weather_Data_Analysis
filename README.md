@@ -1,5 +1,4 @@
 # Weather_Data_Analysis
-
 ## Project Overview
 The purpose of this project is to analyze the past weather data for a given location within a given range of dates-of-the-year (e.g. London, UK averaged 5 rainy days between March 25 and April 3 in the past 17 years) to predict the weather of that location. The interactive dashboard presents analysis of the weather data, including temperature, wind speed, rain, snowfall, and humidity, etc. So a front-end user could access our website and utilize the tool to retrieve instant and informative weather information about a given location for trip planning. 
 
@@ -19,7 +18,7 @@ This project will try to answer at least some of the following questions:
 * Can a machine learning model adequately categorize and cluster, and then return to a front-end user correct or generally realistic weather conditions for a specific season and/or location? A key question of this project is to determine whether a machine-learning tool can return accurate/realistic weather-related information to a user based on location and (perhaps) time of year inputs the user provides. A sensitive and precise machine learning program returning weather-related predictions would be very interesting and potentially very powerful.
 
 ## Data Sets/ Data Tools Used
-* Data Source: [Data Source](https://open-meteo.com/en/docs/historical-weather-api)
+* [Data Source](https://open-meteo.com/en/docs/historical-weather-api)
 * Language: 
     * Python, Flask, Machine Learning
         * Dependecies: pandas, numpy, scipy,  matplotlib, scikit-learn
@@ -27,3 +26,9 @@ This project will try to answer at least some of the following questions:
         * Libraries: Bootstrap, D3, plotly
 * Software: Jupyter Notebook, VSCode
 
+## Machine Learning Model
+* Task 1. Identifying seasons with (unsupervised) k-means clustering
+
+* Task 2. Labeling months
+
+## Database / Dashboard
