@@ -1,5 +1,5 @@
 # Weather_Data_Analysis
-<<<<<<< HEAD
+
 ## Project Overview
 The purpose of this project is to analyze the past weather data for a given location within a given range of dates-of-the-year (e.g. London, UK averaged 5 rainy days between March 25 and April 3 in the past 17 years) to predict the weather of that location. The interactive dashboard presents analysis of the weather data, including temperature, wind speed, rain, snowfall, and humidity, etc. So a front-end user could access our website and utilize the tool to retrieve instant and informative weather information about a given location for trip planning. 
 
@@ -26,6 +26,4 @@ This project will try to answer at least some of the following questions:
     * JavaScript, HTML, CSS
         * Libraries: Bootstrap, D3, plotly
 * Software: Jupyter Notebook, VSCode
-=======
-### Della's GitHub Branch
->>>>>>> main
+
