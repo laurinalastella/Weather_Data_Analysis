@@ -18,20 +18,20 @@
 
 In order of decreasing urgency and likelihood of getting done.
 
- - add a way to enter the state part of location
+ 1. add a way to enter the state part of location
 
- - add location in some form(s) to the output dictionary. options:
+ 2. add location in some form(s) to the output dictionary. options:
   - input strings,
   -  or latt/long obtained from positionstack.com,
   -  or latt/long obtained from the weather API - not the same!
 
- - turn the notebook into a .py file with functions, to enable data-getting from command line or flask app; and a separate testing notebook importing those functions.
+ 3. turn the notebook into a .py file with functions, to enable data-getting from command line or flask app; and a separate testing notebook importing those functions.
 
- - add attributions: in code, in readme, in output ?
+ 4. add attributions: in code, in readme, in output ?
 
- - add error-handling
+ 5. add error-handling
 
- - clean up some of the spaghetti...
+ 6. clean up some of the spaghetti...
 
 (Further aggregation needed for machine learning will be done in that code, not here.)
 
