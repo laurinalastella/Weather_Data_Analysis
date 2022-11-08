@@ -1,11 +1,15 @@
 # Weather_Data_Analysis
+
 ---
 
+
+---
+---
+
+### [Presentation](https://docs.google.com/presentation/d/18-VEJ8IIayyh4h5R4JsaiAnWNHR6Se58ke8NIy-_sis/edit#slide=id.g16a663a645d_1_11)
 ## Project Overview
 The purpose of this project is to analyze the past weather data for a given location within a given range of dates-of-the-year (e.g. London, UK averaged 5 rainy days between March 25 and April 3 in the past 17 years) to predict the weather of that location. The interactive dashboard presents analysis of the weather data, including temperature, wind speed, rain, snowfall, and humidity, etc. So a front-end user could access our website and utilize the tool to retrieve instant and informative weather information about a given location for trip planning. 
 
----
----
 
 ## Motivation & Questions to Answer
 ### Motivation
@@ -22,8 +26,10 @@ This project will try to answer at least some of the following questions:
 
 * Can a machine learning model adequately categorize and cluster, and then return to a front-end user correct or generally realistic weather conditions for a specific season and/or location? A key question of this project is to determine whether a machine-learning tool can return accurate/realistic weather-related information to a user based on location and (perhaps) time of year inputs the user provides. A sensitive and precise machine learning program returning weather-related predictions would be very interesting and potentially very powerful.
 
+
 ---
 ---
+
 
 ## Data Sets/ Data Tools Used
 * [Data Source: Historical Weather API](https://open-meteo.com/en/docs/historical-weather-api)
@@ -34,8 +40,10 @@ This project will try to answer at least some of the following questions:
         * Libraries: Bootstrap, D3, plotly
 * Software: Jupyter Notebook, VSCode
 
+
 ---
 ---
+
 
 ## Machine Learning Model
 We hope to accomplish at least one of two machine learning tasks:
@@ -73,8 +81,10 @@ We hope to accomplish at least one of two machine learning tasks:
 	- We expect insights from data-wrangling for Task 1 to inform our choice of data to feed to these models.
 	- One challenge expected here is in evaluating success: when the model mislabels months because they really have the same weather in the given location, it's not a problem, and is not fixable.
 
+
 ---
 ---
+
 
 ## Database / Dashboard
 Data elements eventually used for Machine Learning model, step by step:
@@ -105,8 +115,10 @@ Data elements eventually used for Machine Learning model, step by step:
         - Snow levels by day
         - Cloudiness level by day
         - Windiness level by day
+
 ---
 ---
+
 
 
 # Communication Protocols
@@ -117,5 +129,6 @@ https://docs.google.com/spreadsheets/d/1PTwWaB1Erp-rNxYoEsYeGcKYzECM3XPB06TSpLs2
 Meetings with all five team members aren't able to happen often, because of limited availability. But other meetings, between 2, 3, or 4 members, happen often. These are often spontaneous, based on who is available and who is working on each task.
 
 In addition, we also post questions and tasks on our group channel on Slack, and through direct messages for more focused conversations.
+
 
 
