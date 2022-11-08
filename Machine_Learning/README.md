@@ -1,7 +1,7 @@
 # MAchine-learning seasons for Weather_Data_Analysis
 
 
- The current approach segments annual data into approximately 10-day blocks like "early march" or "late february" or "mid-june". Averages *and standard deviations* of some weather statistics are computed for each block, for each year. This data, with one row for each block in each year in the historical record, is then fed into PCA and then K-Means clustering, to produce a label for each row. Labels are then aggregated across years using mode to obtain 36 labels, one for each block, independent of year. The hope is that these clusters will be sufficiently convex on the date circle to call them seasons. Preliminary investigations give reasonable outputs for Chicago and San Francisco - even identifying "fogust" in SF!!
+ The current approach segments annual data into approximately 10-day blocks like "early march" or "late february" or "mid-june". Averages *and standard deviations* of some weather statistics are computed for each block, for each year. This data, with one row for each block in each year in the historical record, is then fed into PCA and then K-Means clustering, to produce a label for each row. Labels are then aggregated across years using mode to obtain 36 labels, one for each block, independent of year. The hope is that these clusters will be sufficiently convex on the date circle to call them seasons. Preliminary investigations give reasonable outputs for Chicago and San Francisco - even identifying "fogust" in SF!
 
 ## Work needed.
 

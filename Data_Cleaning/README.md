@@ -18,7 +18,7 @@
 
 In order of decreasing urgency and likelihood of getting done.
 
- 1. add a way to enter the state part of location
+ 1. add a way to enter the state part of location.
 
  2. add location in some form(s) to the output dictionary. options:
   - input strings,
@@ -34,6 +34,4 @@ In order of decreasing urgency and likelihood of getting done.
  6. clean up some of the spaghetti...
 
 (Further aggregation needed for machine learning will be done in that code, not here.)
-
-
 
