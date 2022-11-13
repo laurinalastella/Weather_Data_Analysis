@@ -4,7 +4,7 @@ function init() {
   var selector = d3.select("#selDataset");
 
   // Use the list of city names to populate the select options
-  d3.csv("five_cities.csv").then((data) => {
+  d3.csv("Resources/five_cities.csv").then((data) => {
     console.log(data);
 
     data.forEach((city) => {
@@ -18,6 +18,7 @@ function init() {
     var firstCity = data[0].city;
     buildCharts(firstCity);
     buildMetadata(firstCity);
+    buildBar(firstCity);
   });
 }
 
@@ -28,12 +29,13 @@ function optionChanged(newCity) {
   // Fetch new data each time a new city is selected
   buildMetadata(newCity);
   buildCharts(newCity);
+  buildBar(newCity);
 }
 
 // Deliverable 2: Weather Summary Panel 
 function buildMetadata(city) {
-  // var summary=[]
-  d3.json("five_cities_2010_to_2019.json").then((data) => {
+ 
+  d3.json("Resources/five_cities_2010_to_2019.json").then((data) => {
     var summary= data.weatherdata;
     console.log(city);
     var resultArray = summary.filter(sampleObj => sampleObj.city == city);
@@ -48,7 +50,6 @@ function buildMetadata(city) {
     Object.entries(result).forEach(([key, value]) => {
       PANEL.append("h6").text(`${key.toUpperCase()}: ${value}`);
     });
-
   });
 }
 
@@ -58,7 +59,7 @@ function buildCharts(city) {
   // 2. Use d3.csv to load and retrieve the five_cities.csv file 
   var temp=[]
   var humid=[]
-  d3.csv("five_cities.csv").then((data) => {
+  d3.csv("Resources/five_cities.csv").then((data) => {
   // 3. Retrieve the temperature values for each city 
     data.forEach((cities)=> {
       // console.log(city);
@@ -73,13 +74,13 @@ function buildCharts(city) {
       };
     });
     console.log(temp);
+    console.log(humid);
 
     var pieData = [{
       values: temp,
       labels: ['freezing', 'cold', 'warm','hot'],
       colors: ['blue', 'green', 'orange', 'red'],
       type: 'pie',
-     
     }];
     
     var layout = {
@@ -107,10 +108,50 @@ function buildCharts(city) {
             size: 12
           },
           showarrow: false,
-          text: 'Humidity'
+          text: '<b>Humidity</b>'
         },
       ],
     };
     Plotly.newPlot('humidDonut', donutData, layout);
-});
-};
+  });
+}
+
+// Deliverable 5: Create a Rainfall Bar Chart
+function buildBar(city) {
+  // 2. Use d3.csv to load and retrieve the five_cities.csv file 
+  var rainfall=[]
+  d3.csv("Resources/rainfall_annually.csv").then((data) => {
+  // 3. Retrieve the temperature values for each city 
+    data.forEach((cities)=> {
+      // console.log(city);
+      if(cities.city==city) {
+        rainfall.push(cities.year_2010);
+        rainfall.push(cities.year_2011);
+        rainfall.push(cities.year_2012);
+        rainfall.push(cities.year_2013);
+        rainfall.push(cities.year_2014);
+        rainfall.push(cities.year_2015);
+        rainfall.push(cities.year_2016);
+        rainfall.push(cities.year_2017);
+        rainfall.push(cities.year_2018);
+        rainfall.push(cities.year_2019);
+      };
+    });
+    console.log(rainfall);
+
+    var barData = [{
+    x: ['2010', '2011','2012','2013','2014','2015','2016','2017','2018','2019'],
+    y: rainfall,
+    type: 'bar'
+  }];
+
+    var layout = {
+      title: {text: "<b>Annual Cumulative Rainfall in Ten Years (2010-2019)</b>"},
+      yaxis: {
+        title: 'Rainfall (inches)'},
+      height: 500,
+      width: 1000,
+    };
+    Plotly.newPlot('rainBar', barData, layout);
+  });
+}
