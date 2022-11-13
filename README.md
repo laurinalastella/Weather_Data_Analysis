@@ -1,11 +1,5 @@
 # Weather_Data_Analysis
-
----
-
-
----
----
-
+### [Dashboard](https://lilyhanhub.github.io/Weather_Data_Analysis/)
 ### [Presentation](https://docs.google.com/presentation/d/18-VEJ8IIayyh4h5R4JsaiAnWNHR6Se58ke8NIy-_sis/edit#slide=id.g16a663a645d_1_11)
 ## Project Overview
 The purpose of this project is to analyze the past weather data for a given location within a given range of dates-of-the-year (e.g. London, UK averaged 5 rainy days between March 25 and April 3 in the past 17 years) to predict the weather of that location. The interactive dashboard presents analysis of the weather data, including temperature, wind speed, rain, snowfall, and humidity, etc. So a front-end user could access our website and utilize the tool to retrieve instant and informative weather information about a given location for trip planning. 
