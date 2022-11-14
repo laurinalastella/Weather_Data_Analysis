@@ -146,7 +146,7 @@ function buildBar(city) {
   }];
 
     var layout = {
-      title: {text: "<b>Annual Cumulative Rainfall in Ten Years (2010-2019)</b>"},
+      title: {text: "<b>Annual Cumulative Rainfall (2010-2019)</b>"},
       yaxis: {
         title: 'Rainfall (inches)'},
       height: 500,
