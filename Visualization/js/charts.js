@@ -79,7 +79,8 @@ function buildCharts(city) {
     var pieData = [{
       values: temp,
       labels: ['freezing', 'cold', 'warm','hot'],
-      colors: ['blue', 'green', 'orange', 'red'],
+      'marker': {
+      colors: ['aqua', 'darksteelblue', 'gold', 'red']},
       type: 'pie',
     }];
     
@@ -94,6 +95,8 @@ function buildCharts(city) {
   var donutData = [{
     values: humid,
     labels: ['low_humidity', 'medium_humidity', 'high_humidity'],
+    'marker': {
+      colors: ['yellow', 'lawngreen', 'green']},
     type: 'pie',
     hole: .4
   }];
