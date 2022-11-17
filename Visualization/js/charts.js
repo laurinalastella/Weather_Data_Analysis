@@ -94,7 +94,7 @@ function buildCharts(city) {
 // Deliverable 4: Create a Humidity Donut Chart
   var donutData = [{
     values: humid,
-    labels: ['low_humidity', 'medium_humidity', 'high_humidity'],
+    labels: ['Low', 'Medium', 'High'],
     'marker': {
       colors: ['yellow', 'lawngreen', 'green']},
     type: 'pie',
@@ -152,6 +152,8 @@ function buildBar(city) {
       title: {text: "<b>Annual Cumulative Rainfall (2010-2019)</b>"},
       yaxis: {
         title: 'Rainfall (inches)'},
+      xaxis: {
+          title: 'Year'},
       height: 500,
       width: 1000,
     };
