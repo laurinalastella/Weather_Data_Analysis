@@ -177,9 +177,11 @@ def get_weather_url(latitude, longitude, start_year, end_year, daily_or_hourly):
 # again, daily_or_hourly must be one of the two strings
 # note that wind_direction in hourly is null when windspeed is 0
 # we do nothing with wind direction, so don't bother fixing it
-# gaierror means check your internet connection
-    # Insert Exception and If:
-class DailyOrHourlyExceptionError(Exception):
+# gaierror means check your internet connection.
+
+# Error handling for Daily and/or Hourly values,
+# Check for values not being strings.
+class DailyOrHourlyError(Exception):
     pass
 
 def get_weather(latitude, longitude, start_year, end_year, daily_or_hourly):
@@ -191,18 +193,17 @@ def get_weather(latitude, longitude, start_year, end_year, daily_or_hourly):
 
     # 
     if not isinstance(daily_or_hourly, str):
-        raise DailyOrHourlyExceptionError(daily_or_hourly)
-
+        raise DailyOrHourlyError(daily_or_hourly)
 
     try:
     # now turn dictionary into dataframe
         weather_raw = pd.DataFrame.from_records(weather_hr_json[daily_or_hourly])
     except KeyError:
-        return(f"KeyError in daily_or_hourly.")
+        return(f"KeyError in daily_or_hourly. Probably invalid Country or City input.")
     except TypeError:
-        return(f"TypeError in daily_or_hourly.")
+        return(f"TypeError in daily_or_hourly. Probably invalid Country or City input.")
     except IndexError:
-        return(f"IndexError in daily_or_hourly.")
+        return(f"IndexError in daily_or_hourly. Probably invalid Country or City input.")
     except BaseException as e:
         return(e)
     
@@ -230,15 +231,13 @@ def enth(x, n):
 
 # Error handling for Daily and/or Hourly values,
 # Check for values not being strings.
-class DailyOrHourlyExceptionError(Exception):
-    pass
 
 def agg_hourly_and_daily(hourly_df, daily_df):
 
     if isinstance(hourly_df, str):
-        raise DailyOrHourlyExceptionError(hourly_df)
+        raise DailyOrHourlyError(hourly_df)
     if isinstance(daily_df, str):
-        raise DailyOrHourlyExceptionError(daily_df)
+        raise DailyOrHourlyError(daily_df)
 
     ## BEWARE arguments are passed by reference, don't mess with them ! ##
     output_df = hourly_df.groupby('pure_date').agg(
@@ -385,8 +384,8 @@ def bool_to_stats(daf):
     stats_dict = {}
     # aggregate
 
-    if stats_dict == {}:
-        raise StatsExceptionError(stats_dict)
+    # if stats_dict == {}:
+    #     raise StatsExceptionError(stats_dict)
 
     try:
         for stat in bool_cols:
@@ -411,14 +410,14 @@ def bool_to_stats(daf):
 
 # Error handling for Date Out of Range,
 # before YYYY or after YYYY
-class DateOutOfRangeExceptionError(Exception):
+class DateOutOfRangeError(Exception):
     pass
 
 def get_clean_weather(latitude, longitude, start_year, end_year):
     if not 2000 < start_year < 2022:
-        raise DateOutOfRangeExceptionError(start_year)
+        raise DateOutOfRangeError(start_year)
     if not 2000 < end_year < 2022:
-        raise DateOutOfRangeExceptionError(end_year)
+        raise DateOutOfRangeError(end_year)
     hourly_df = get_weather(latitude, longitude, start_year, end_year, 'hourly')
     daily_df = get_weather(latitude, longitude, start_year, end_year, 'daily')
     return agg_hourly_and_daily(hourly_df, daily_df)
@@ -430,21 +429,35 @@ def get_clean_weather_loc(country, city, start_year, end_year):
 # user-facing function, so start_date, end_date are ISO strings, not datetime
 
 def get_adjective_stats(latitude, longitude, start_date_iso='2023-01-01', end_date_iso='2023-01-01', years=20):
-    start_date = datetime.datetime.fromisoformat(start_date_iso[0:10])
-    end_date = datetime.datetime.fromisoformat(end_date_iso[0:10])
-    # latest year for which full-year data exist
-    end_year = datetime.datetime.today().year - 1
-    # get-weather includes both endpoints, so gives 10 years with start=n, end=n+9
-    start_year = end_year -years +1
-    # get weather data
-    daf = get_clean_weather(latitude, longitude, start_year, end_year)
-    # filter by dates  
-    # adding extra years in case requested dates are far in the future
-    daf = date_period_filter(daf, start_date, end_date, years+3)
-    # add boolean columns
-    daf = add_bool_col_for_adj(daf)
-    # get stats and return them
-    return bool_to_stats(daf)
+    
+    try:
+        start_date = datetime.datetime.fromisoformat(start_date_iso[0:10])
+        end_date = datetime.datetime.fromisoformat(end_date_iso[0:10])
+        # latest year for which full-year data exist
+        end_year = datetime.datetime.today().year - 1
+        # get-weather includes both endpoints, so gives 10 years with start=n, end=n+9
+        start_year = end_year -years +1
+        # get weather data
+        daf = get_clean_weather(latitude, longitude, start_year, end_year)
+        # filter by dates  
+        # adding extra years in case requested dates are far in the future
+        daf = date_period_filter(daf, start_date, end_date, years+3)
+        # add boolean columns
+        daf = add_bool_col_for_adj(daf)
+        # get stats and return them
+        return bool_to_stats(daf)
+
+    except ValueError:
+        return(f"ValueError in ISO date, get_adjective_stats.")
+    except KeyError:
+        return(f"KeyError in ISO date, get_adjective_stats.")
+    except TypeError:
+        return(f"TypeError in ISO date, get_adjective_stats.")
+    except IndexError:
+        return(f"IndexError in ISO date, get_adjective_stats.")
+    except BaseException as e:
+        return(e)
+
 
 
 
