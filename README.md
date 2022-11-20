@@ -1,14 +1,8 @@
 # Weather_Data_Analysis
-
----
-
-
----
----
-
+### [Dashboard](https://lilyhanhub.github.io/Weather_Data_Analysis/)
 ### [Presentation](https://docs.google.com/presentation/d/18-VEJ8IIayyh4h5R4JsaiAnWNHR6Se58ke8NIy-_sis/edit#slide=id.g16a663a645d_1_11)
 ## Project Overview
-The purpose of this project is to analyze the past weather data for a given location within a given range of dates-of-the-year (e.g. London, UK averaged 5 rainy days between March 25 and April 3 in the past 17 years) to predict the weather of that location. The interactive dashboard presents analysis of the weather data, including temperature, wind speed, rain, snowfall, and humidity, etc. So a front-end user could access our website and utilize the tool to retrieve instant and informative weather information about a given location for trip planning. 
+The purpose of this project is to analyze the past weather data for a given location within a given range of dates-of-the-year (e.g. London, UK averaged 5 rainy days between March 25 and April 3 in the past 17 years) to predict the weather of that location. The interactive dashboard presents analysis of the weather data, including temperature, rainfall, snowllfall, windspeed, humidity, and cloudiness. So a front-end user could access our website and utilize the tool to retrieve instant and informative weather information about a given location for trip planning. 
 
 
 ## Motivation & Questions to Answer
@@ -118,17 +112,6 @@ Data elements eventually used for Machine Learning model, step by step:
 
 ---
 ---
-
-
-
-# Communication Protocols
-
-Before the group project started, we created a shared Google Sheet to track everyone's available times by date:
-https://docs.google.com/spreadsheets/d/1PTwWaB1Erp-rNxYoEsYeGcKYzECM3XPB06TSpLs2F6o/edit#gid=0
-
-Meetings with all five team members aren't able to happen often, because of limited availability. But other meetings, between 2, 3, or 4 members, happen often. These are often spontaneous, based on who is available and who is working on each task.
-
-In addition, we also post questions and tasks on our group channel on Slack, and through direct messages for more focused conversations.
 
 
 
