@@ -64,7 +64,7 @@ We hope to accomplish at least one of two machine learning tasks:
         - Obvious hyper-parameters: the number of principal components we feed into the k-means algorithm, the number of clusters.
         - Remove outliers? We may want to remove outliers at various steps: before PCA; between PCA and k-means; or even after k-means, defining outliers as tiny clusters.
         - Smooth the output. We may want to smooth out the data along the day-of-the-year axis in some way, to get clusters that are more convex/connected. Maybe we add the data for a few adjacent days to the weather data for a fixed day before feeding it all into PCA. Maybe after labeling days in the historical record, we pay attention to adjacent days when aggregating to get a label for the day of the year. Maybe a date interval with a great variety of labels becomes a "weather varies greatly" season - that's a real thing, afterall.
-        
+![Machine Learning](Resources/machine_learning.png)   
 
 - Task 2. Labeling months.
 
@@ -77,8 +77,8 @@ We hope to accomplish at least one of two machine learning tasks:
 ---
 ---
 
-
 ## Database / Dashboard
+![Dashboard](Resources/dashboard.png)
 Data elements eventually used for Machine Learning model, step by step:
 - Starting with user input for geographical area, pulling in Latitude/Longitude to be fed to the weather API. Tested several free API options.
     - N/A: Tried using https://api-ninjas.com/api/geocoding but it was too unreliable.
