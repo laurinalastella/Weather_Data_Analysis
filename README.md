@@ -110,19 +110,5 @@ Data elements eventually used for Machine Learning model, step by step:
         - Cloudiness level by day
         - Windiness level by day
 
----
----
-
-
-
-# Communication Protocols
-
-Before the group project started, we created a shared Google Sheet to track everyone's available times by date:
-https://docs.google.com/spreadsheets/d/1PTwWaB1Erp-rNxYoEsYeGcKYzECM3XPB06TSpLs2F6o/edit#gid=0
-
-Meetings with all five team members aren't able to happen often, because of limited availability. But other meetings, between 2, 3, or 4 members, happen often. These are often spontaneous, based on who is available and who is working on each task.
-
-In addition, we also post questions and tasks on our group channel on Slack, and through direct messages for more focused conversations.
-
 
 
