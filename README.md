@@ -29,12 +29,10 @@ This project will try to answer at least some of the following questions:
 * [Data Source: Historical Weather API](https://open-meteo.com/en/docs/historical-weather-api)
 * Language: 
     * Python, Flask, Machine Learning
-        * Dependecies: pandas, numpy, scipy,  matplotlib, scikit-learn
+        * Dependecies: pandas, numpy, datetime, scikit-learn, hvplot
     * JavaScript, HTML, CSS
         * Libraries: Bootstrap, D3, plotly
-* Software: Jupyter Notebook, VSCode
-
-
+* Software: Jupyter Notebook, VSCode, Heroku
 ---
 ---
 
