@@ -4,7 +4,7 @@ function init() {
   var selector = d3.select("#selDataset");
 
   // Use the list of city names to populate the select options
-  d3.csv("Resources/five_cities.csv").then((data) => {
+  d3.csv("Resources/eight_cities.csv").then((data) => {
     console.log(data);
 
     data.forEach((city) => {
@@ -35,7 +35,7 @@ function optionChanged(newCity) {
 // Deliverable 2: Weather Summary Panel 
 function buildMetadata(city) {
  
-  d3.json("Resources/five_cities_2010_to_2019.json").then((data) => {
+  d3.json("Resources/eight_cities_2010_to_2019.json").then((data) => {
     var summary= data.weatherdata;
     console.log(city);
     var resultArray = summary.filter(sampleObj => sampleObj.city == city);
@@ -59,7 +59,7 @@ function buildCharts(city) {
   // 2. Use d3.csv to load and retrieve the five_cities.csv file 
   var temp=[]
   var humid=[]
-  d3.csv("Resources/five_cities.csv").then((data) => {
+  d3.csv("Resources/eight_cities.csv").then((data) => {
   // 3. Retrieve the temperature values for each city 
     data.forEach((cities)=> {
       // console.log(city);
