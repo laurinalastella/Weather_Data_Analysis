@@ -33,6 +33,16 @@
     cursor: pointer;
     }
 
+    .footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #3f5b89;
+    color: white;
+    text-align: left;
+    }
+
 </style>
 
 </head>
@@ -81,8 +91,8 @@
     <div>
         <p></p>
         <p>
-    <button id="get_links" class="button1">Generate Link</button>
-    </p>
+            <button id="get_links" class="button1">Generate Link</button>
+        </p>
     <h1 class="p1">
     <a id="history-link">Go to Weather History JSON</a>
     <!-- <a><button id="history-link" class="button2">Go to Weather JSON</button></a> -->
@@ -138,5 +148,24 @@
 
     </script>
 
+    <div class="footer">
+        <p class="p1">
+            Data Sources:
+            <p class="p1">
+            <strong>Weather API</strong>
+            <br>
+            <em>60 years global archive with hourly values at 0.25° resolution</em>
+            <br>
+            <a href>https://open-meteo.com/en/docs/historical-weather-api</a>
+            </p>
+            <p class="p1">
+            <strong>PositionStack</strong>
+            <br>
+            <em>The positionstack API was built to offer a straightforward and reliable solution for forward and reverse geocoding, covering more than 2 billion places and addresses worldwide.</em>
+            <br>
+            <a href=>https://positionstack.com/documentation</a>
+            </p>
+        </p>
+    </div>
 </body>
 </html>
