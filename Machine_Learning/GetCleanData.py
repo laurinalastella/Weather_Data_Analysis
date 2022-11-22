@@ -6,52 +6,97 @@ import numpy as np
 # for position API
 import http.client, urllib.parse
 
-# get_latt_long gets(country_input, query_input) lattitude and longitude 
-# for a given city and country from positionstack.com
-# ### variables could use renaming:
-#    country_input means country,
-#    query_input means city
-# ### we really need to add a state variable as well
+#       NotString errors will never be raised: flask passes everything along as a string
+#       otherwise, we'd have a problem with city, because that can be a zip code
+# Error handling: Country
+class CoutryNotStringError(Exception):
+    pass
+# Error handling: City
+class CityNotStringError(Exception):
+    pass
+# Error handling: PositionStack API Call
+class PositionAPIBadCallError(Exception):
+    pass
+# Error handling: PositionStack API Request
+class PositionAPIBadRequestError(Exception):
+    pass
+# Error handling: PositionStack API Load
+class PositionAPIBadLoadError(Exception):
+    pass
+# Error handling: Weather API Call
+# failed at getting text using request.get
+class WeatherAPIBadCallError(Exception):
+    pass
+# Error handling: Weather API Load
+# failed at converting text into json, then into df; or
+# returned data contains lots of nulls: likely location at sea or near poles
+class WeatherAPIBadLoadError(Exception):
+    pass
+# Error handling: ISO Date Format in get_adjective_stats
+class DateFormatBadError(Exception):
+    pass
 
-def get_latt_long(country_input, query_input):
-    conn = http.client.HTTPConnection('api.positionstack.com')
+# get_lat_long gets(country, city) latitude and longitude 
+# for a given country (2-character code) and city (name or postal code) (="query")
+# from positionstack.com
+def get_lat_long(country, city):
+
+    if not isinstance(country, str):
+        raise CoutryNotStringError from None
+    if not isinstance(city, str):
+        raise CityNotStringError from None
+
+    try:
+        conn = http.client.HTTPConnection('api.positionstack.com')
+    except:
+        raise PositionAPIBadCallError from None
+
     params = urllib.parse.urlencode({
+        # Free and open API, no personal info attached to this access key.
         'access_key': '1fbf7de4ce05274e9b9005659970c429',
-        # Variables get live user input above.
-        'country': country_input,
-        #'region': region_input,
-        'query': query_input,
+        # Variables get live user input.
+        'country': country,
+        'query': city,
         # "limit" of 1 ensures only 1 Lat/Lon will be passed below. 
         'limit': 1
     })
-    conn.request('GET', '/v1/forward?{}'.format(params))
-    res = conn.getresponse()
-    geo = res.read()
-    geo_str = (geo.decode('utf-8'))
-    # Convert string to json (which is a dictionary).
-    geo_json = json.loads(geo_str)
-    # extract lattitude
-    geo_json_lat = geo_json['data']
-    var_lat = []
-    for x in geo_json_lat:
-        var_lat.append((x['latitude']))
-    # extract longitude
-    geo_json_lon = geo_json['data']
-    var_lon = []
-    for x in geo_json_lon:
-        var_lon.append((x['longitude']))
-    return (var_lat[0], var_lon[0])
+
+    try:
+        conn.request('GET', '/v1/forward?{}'.format(params))
+        res = conn.getresponse()
+    except:
+        raise PositionAPIBadRequestError from None
+
+    try:
+        geo = res.read()
+        geo_str = (geo.decode('utf-8'))
+        # Convert string to json (which is a dictionary).
+        geo_json = json.loads(geo_str)
+        # extract latitude
+        geo_json_lat = geo_json['data']
+        var_lat = [] 
+        for x in geo_json_lat:
+            var_lat.append((x['latitude']))
+        # extract longitude
+        geo_json_lon = geo_json['data']
+        var_lon = []
+        for x in geo_json_lon:
+            var_lon.append((x['longitude']))
+        return (var_lat[0], var_lon[0])
+    except:
+        raise PositionAPIBadLoadError from None
+
 
 # The next two functions assemble urls for weather API requests
 # from https://archive-api.open-meteo.com/v1/era5
 # The time interval is hard-coded to be whole years; also hard-coded:
 # variables drawn, imperial (USian) units used, (PDT) timezone.
 
-def get_hourly_weather_url(lattitude, longitude, start_year, end_year):
+def get_hourly_weather_url(latitude, longitude, start_year, end_year):
     url_snip_hr = {}
     # Break URL into snippets to be assembled below, hourly:
     url_snip_hr[1] = "https://archive-api.open-meteo.com/v1/era5?latitude=" 
-    url_snip_hr[2]= str(lattitude)
+    url_snip_hr[2]= str(latitude)
     url_snip_hr[3] = "&longitude="
     url_snip_hr[4] = str(longitude)
     url_snip_hr[5] = "&start_date="
@@ -64,8 +109,11 @@ def get_hourly_weather_url(lattitude, longitude, start_year, end_year):
     url_snip_hr[12] = "rain,"   # data element
     url_snip_hr[13] = "snowfall,"   # data element
     url_snip_hr[14] = "cloudcover,"   # data element
-    url_snip_hr[15] = "windspeed_10m,"   # data element
-    url_snip_hr[16] = "winddirection_10m"   # data element
+    # changing to get rid of wind direction, to make it easier to identify null returns
+    url_snip_hr[15] = "windspeed_10m"   # data element
+    url_snip_hr[16] = ""   # data element
+    # url_snip_hr[15] = "windspeed_10m,"   # data element
+    # url_snip_hr[16] = "winddirection_10m"   # data element
     url_snip_hr[17] = "&timezone=America%2FLos_Angeles"   # time zone
     url_snip_hr[18] = "&temperature_unit=fahrenheit"   # temp unit
     url_snip_hr[19] = "&windspeed_unit=mph"   # windspeed unit
@@ -73,13 +121,13 @@ def get_hourly_weather_url(lattitude, longitude, start_year, end_year):
     weather_url_hr = ""
     for i in range(20):
         weather_url_hr += url_snip_hr[i+1]
-    return weather_url_hr   
+    return weather_url_hr
 
-def get_daily_weather_url(lattitude, longitude, start_year, end_year):
+def get_daily_weather_url(latitude, longitude, start_year, end_year):
     url_snip_dy = {}
-    # Break URL into snippets to be assembled below, hourly:
+    # Break URL into snippets to be assembled below, daily:
     url_snip_dy[1] = "https://archive-api.open-meteo.com/v1/era5?latitude=" 
-    url_snip_dy[2] = str(lattitude)   # latitude, input from previous json
+    url_snip_dy[2] = str(latitude)   # latitude, input from previous json
     url_snip_dy[3] = "&longitude="
     url_snip_dy[4] = str(longitude)   # longitude, input from previous json
     url_snip_dy[5] = "&start_date="
@@ -105,15 +153,15 @@ def get_daily_weather_url(lattitude, longitude, start_year, end_year):
 # daily_or_hourly should be a string, 'daily' or 'hourly'
 #  ### needs error-handling ###
 
-def get_weather_url(lattitude, longitude, start_year, end_year, daily_or_hourly):
+def get_weather_url(latitude, longitude, start_year, end_year, daily_or_hourly):
     if daily_or_hourly == 'daily':
-        return get_daily_weather_url(lattitude, longitude, start_year, end_year)
+        return get_daily_weather_url(latitude, longitude, start_year, end_year)
     elif daily_or_hourly== 'hourly':
-        return get_hourly_weather_url(lattitude, longitude, start_year, end_year)
+        return get_hourly_weather_url(latitude, longitude, start_year, end_year)
     else:
         return 'error'
 
-# this function retrieves weather data for given lattitue/longitude coordinates
+# this function retrieves weather data for given latitue/longitude coordinates
 # from https://archive-api.open-meteo.com/v1/era5
 # for the given years; 
 # e.g. if start_year=2010 and end_year=2020, 11 years of data are retrieved,
@@ -121,16 +169,31 @@ def get_weather_url(lattitude, longitude, start_year, end_year, daily_or_hourly)
 # again, daily_or_hourly must be one of the two strings
 # note that wind_direction in hourly is null when windspeed is 0
 # we do nothing with wind direction, so don't bother fixing it
-# gaierror means check your internet connection
+# gaierror means check your internet connection.
 
-def get_weather(lattitude, longitude, start_year, end_year, daily_or_hourly):
-    url = get_weather_url(lattitude, longitude, start_year, end_year, daily_or_hourly)
-    # Data comes in as one long string:
-    weather_hr_str = requests.get(url).text
-    # So convert string to dictionary.
-    weather_hr_json = json.loads(weather_hr_str)
-    # now turn dictionary into dataframe
-    weather_raw = pd.DataFrame.from_records(weather_hr_json[daily_or_hourly])
+def get_weather(latitude, longitude, start_year, end_year, daily_or_hourly):
+    url = get_weather_url(latitude, longitude, start_year, end_year, daily_or_hourly)
+    
+    try:
+        # Data comes in as one long string:
+        weather_str = requests.get(url).text
+    except:
+        raise WeatherAPIBadCallError from None
+    
+    try:
+        # So convert string to dictionary.
+        weather_hr_json = json.loads(weather_str)
+        # now turn dictionary into dataframe
+        weather_raw = pd.DataFrame.from_records(weather_hr_json[daily_or_hourly])
+    except:
+        raise WeatherAPIBadLoadError from None
+
+    # Convert a column to a series and check if ALL values are NaN/None
+    # column must be present in both hourly and daily! so static is problem
+    if weather_raw.isnull().values.any():
+    # if weather_raw[weather_raw.columns[0]].isnull().all():
+        raise WeatherAPIBadLoadError from None
+
     # convert the provided ISO string 'time' into a 'pure_date' in python datetime format
     # for aggregating and joining with daily data
     weather_raw["pure_date"] = weather_raw['time'].map(lambda x: 
@@ -243,8 +306,8 @@ def add_bool_col_for_adj(daf):
     daf_with_bool['partly_cloudy'] = (daf_with_bool['clear'] == 0) & (daf_with_bool['cloudy'] == 0)
 
     # rain
-    # not_rainy = 0 hours, or  <2.5 mm total rain (Laurina changing to 0.5 inches)
-    # very_rainy = >=6 hour and >=10mm (Laurina changing to 2 inches)
+    # not_rainy = 0 hours, or  <2.5 mm total rain (L. LaStella changing to 0.5 inches)
+    # very_rainy = >=6 hour and >=10mm (L. LaStella changing to 2 inches)
     # lightly_rainy = leftovers
     daf_with_bool['not_rainy'] = (daf_with_bool['rain_sum'] <= 0.5) | (daf_with_bool['precipitation_hours'] == 0)
     daf_with_bool['very_rainy'] = (daf_with_bool['rain_sum'] >= 2) | (daf_with_bool['precipitation_hours'] >= 6)
@@ -299,26 +362,31 @@ def bool_to_stats(daf):
 
 # now some wrapper functions
 
-def get_clean_weather(lattitude, longitude, start_year, end_year):
-    hourly_df = get_weather(lattitude, longitude, start_year, end_year, 'hourly')
-    daily_df = get_weather(lattitude, longitude, start_year, end_year, 'daily')
+def get_clean_weather(latitude, longitude, start_year, end_year):
+    hourly_df = get_weather(latitude, longitude, start_year, end_year, 'hourly')
+    daily_df = get_weather(latitude, longitude, start_year, end_year, 'daily')
     return agg_hourly_and_daily(hourly_df, daily_df)
 
 def get_clean_weather_loc(country, city, start_year, end_year):
-    coords = get_latt_long(country, city)
+    coords = get_lat_long(country, city)
     return get_clean_weather(coords[0], coords[1], start_year, end_year)
 
-# user-facing function, so start_date, end_date are ISO strings, not datetime
+# user-facing function, so start_date, end_date are ISO strings, not datetime.
 
-def get_adjective_stats(lattitude, longitude, start_date_iso, end_date_iso, years):
-    start_date = datetime.datetime.fromisoformat(start_date_iso[0:10])
-    end_date = datetime.datetime.fromisoformat(end_date_iso[0:10])
+def get_adjective_stats(latitude, longitude, start_date_iso, end_date_iso, years):
+
+    try:
+        start_date = datetime.datetime.fromisoformat(start_date_iso[0:10])
+        end_date = datetime.datetime.fromisoformat(end_date_iso[0:10])
+    except:
+        raise DateFormatBadError from None
+
     # latest year for which full-year data exist
     end_year = datetime.datetime.today().year - 1
     # get-weather includes both endpoints, so gives 10 years with start=n, end=n+9
     start_year = end_year -years +1
     # get weather data
-    daf = get_clean_weather(lattitude, longitude, start_year, end_year)
+    daf = get_clean_weather(latitude, longitude, start_year, end_year)
     # filter by dates  
     # adding extra years in case requested dates are far in the future
     daf = date_period_filter(daf, start_date, end_date, years+3)
@@ -328,7 +396,7 @@ def get_adjective_stats(lattitude, longitude, start_date_iso, end_date_iso, year
     return bool_to_stats(daf)
 
 def get_adjective_stats_loc(country, city, start_date_iso, end_date_iso):
-    coords = get_latt_long(country, city)
+    coords = get_lat_long(country, city)
     return get_adjective_stats(coords[0], coords[1], start_date_iso, end_date_iso, 20)
 
 
