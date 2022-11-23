@@ -27,7 +27,6 @@ This project will try to answer at least some of the following questions:
 ---
 ---
 
-
 ## Data Sets/ Data Tools Used
 * [Data Source: Historical Weather API](https://open-meteo.com/en/docs/historical-weather-api)
 * Language: 
@@ -39,7 +38,37 @@ This project will try to answer at least some of the following questions:
 ---
 ---
 
-
+## Database
+Data elements eventually used for Machine Learning model, step by step:
+- Starting with user input for geographical area, pulling in Latitude/Longitude to be fed to the weather API. Tested several free API options.
+    - N/A: Tried using https://api-ninjas.com/api/geocoding but it was too unreliable.
+    - N/A: Tried Google AWS geocoding, but it was more complicated than we needed.
+    - Settled on https://positionstack.com and eventually got that working. Free for several thousand pulls/month.
+        - Input, from web site user: “query” field = “Specify your query as a free-text address, place name or using any other common text-based location identifier (e.g. postal code, city name, region name).”
+        - Output to be fed to weather API: Tuple containing Latitude and Longitude for one geographic location.
+- Weather API:
+    - Input: Latitude and Longitude for one geographic location, extracted from API based on user input.
+    - Output: Selected weather data points from Historical Weather API (https://open-meteo.com/en/docs/historical-weather-api) based on Latitude and Longitude:
+    - Output data elements being tested: 
+        - Hourly data. Currently testing with:
+           - 'time',
+           - 'temperature_2m_degF', 
+           - 'relativehumidity_2m_perc', 
+           - 'rain_inch',
+           - 'snowfall_cm', 
+           - 'cloudcover_perc', 
+           - 'windspeed_10m_mph',
+           - 'winddirection_10m_deg'
+        - Daily data. No tests yet. Stand by.
+    - Output categories created from the cleaned API data, to be fed into the Machine Learning models. Some can be used as direct averages or sums, others will be transformed into “pivot table” formats of several sub-categories for the levels of intensity. (For example: Raininess levels by day: “No Rain”/”Light Rain”/”Heavy Rain” where each column contains 1 or 0 for True/False.)
+        - Temperature levels by day
+        - Humidity levels by day
+        - Raininess levels by day
+        - Snow levels by day
+        - Cloudiness level by day
+        - Windiness level by day
+---
+---
 ## Machine Learning Model
 We hope to accomplish at least one of two machine learning tasks:
 
@@ -80,52 +109,23 @@ We hope to accomplish at least one of two machine learning tasks:
 ---
 ---
 
-## Database / Dashboard
+## Dashboard
 Our interactive front-end/dashboard features a drop-down list of 8 cities. A user can select from the 8 options to produce a comprehensive dashboard of weather information that automatically adjusts itself based on their selection. In addition to the drop-down list, our dashboard includes the following features:
 
-- Weather Summary Panel
+- Weather Summary Panel: 
 The weather summary panel includes a percentage breakdown of temperature by category (freezing, cold, warm, hot), a percentage breakdown of raininess (not rainy, lightly rainy, very rainy), of snowiness (not snowy, lighly snowy, very snowy), humidity (low, medium and high humidity), and cloudiness (clear, partly, cloudy, or cloudy). Finally, the summary panel displays the "geo" location of the selection. In the screenshow below, you can see the geo location is the US | New York.
 
-- Temperature Pie Chart
+- Temperature Pie Chart: 
 Our temperature pie chart graphically displays the percentage breakdown of temperature by the categories provided in the Weather Summary Panel. The categories are color-coded to "match" the term they describe. Thus, hot is colored in red. Warm is colored in orange. Cold is colored in blue, and freezing is colored in a light blue reminiscent of ice and iciness. Hovering over the pie chart with their mouse cursor, a user will also see pop-up information.
 
-- Humidity Donut Chart
+- Humidity Donut Chart: 
 Humidity is one of the most critical yet poorly understood measures of weather conditions. According to the National Weather Service Glossary (https://tinyurl.com/4ne5a4ry), humidity is defined as a measure of the water vapor content of the air. Humidity creates the swampy, damp feel to the air that often causes people to sweat even if the actual air temperature is moderate. Our dashboard visualizes the percentage breakdown of days that were of high, medium and low humidity for a given location. As the user toggles through our selection of cities they will see that the humidity breakdown changes. Cities like New York tend to be very humid more than 75 percent of the time. Other cities, like Riyadh Saudi Arabia, almost always experience low humidity.
 
-- Annual Cumulative Rainfall Histogram
+- Annual Cumulative Rainfall Histogram: 
 Last, our interactive dashboard provides the user with the cumulative annual rainfall given in inches for each year between 2010-2019. The y-axis is given in inches of rainfall. The x-axis shows each year. As the user toggles through our list of cities, they will see that some cities (such as Tokyo) can experience more than 60 inches of rain in one year. That's a lot! Other cities, such as the African desert city of Tombouctou, will frequently see less than 1 inch of rain in an entire year.
-
+![Dashboard](Resources/dashboard.png)
 - Dashboard Features Still in Development
 Our team's long-term vision for our interactive dashboard included a gauge chart, a stacked bar chart of annual rainfall that would allow a user to more quickly compare cities for raininess. Last, our visualization team wanted to incorporate space for definitions and a glossary of terms that would help a user better understand what we mean by, for example, "hot" or "low humidity" as these are specific terms that convey specific information about weather conditions.
-![Dashboard](Resources/dashboard.png)
-Data elements eventually used for Machine Learning model, step by step:
-- Starting with user input for geographical area, pulling in Latitude/Longitude to be fed to the weather API. Tested several free API options.
-    - N/A: Tried using https://api-ninjas.com/api/geocoding but it was too unreliable.
-    - N/A: Tried Google AWS geocoding, but it was more complicated than we needed.
-    - Settled on https://positionstack.com and eventually got that working. Free for several thousand pulls/month.
-        - Input, from web site user: “query” field = “Specify your query as a free-text address, place name or using any other common text-based location identifier (e.g. postal code, city name, region name).”
-        - Output to be fed to weather API: Tuple containing Latitude and Longitude for one geographic location.
-- Weather API:
-    - Input: Latitude and Longitude for one geographic location, extracted from API based on user input.
-    - Output: Selected weather data points from Historical Weather API (https://open-meteo.com/en/docs/historical-weather-api) based on Latitude and Longitude:
-    - Output data elements being tested: 
-        - Hourly data. Currently testing with:
-           - 'time',
-           - 'temperature_2m_degF', 
-           - 'relativehumidity_2m_perc', 
-           - 'rain_inch',
-           - 'snowfall_cm', 
-           - 'cloudcover_perc', 
-           - 'windspeed_10m_mph',
-           - 'winddirection_10m_deg'
-        - Daily data. No tests yet. Stand by.
-    - Output categories created from the cleaned API data, to be fed into the Machine Learning models. Some can be used as direct averages or sums, others will be transformed into “pivot table” formats of several sub-categories for the levels of intensity. (For example: Raininess levels by day: “No Rain”/”Light Rain”/”Heavy Rain” where each column contains 1 or 0 for True/False.)
-        - Temperature levels by day
-        - Humidity levels by day
-        - Raininess levels by day
-        - Snow levels by day
-        - Cloudiness level by day
-        - Windiness level by day
 
 
 
