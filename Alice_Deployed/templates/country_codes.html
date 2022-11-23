@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Country Codes</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+
+<style>
+    table, th, td {
+        border: 1px solid white;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+    th, td {
+        background-color: #bee6fe;
+    }
+    .p1 {
+    font-family: Arial, Helvetica, sans-serif;
+    }
+
+</style>
+
+</head>
+
+<body>
+    <h1 class="p1">Codes by Country Name (in English)</h1>
+    <p class="p1">
+        <a href="/">Go back to Weather History</a>
+    </p>
+    
+    <table class="p1">
+        <tr><td>Afghanistan</td><td>AF</tr>
+            <tr><td>Aland Islands</td><td>AX</tr>
+            <tr><td>Albania</td><td>AL</tr>
+            <tr><td>Algeria</td><td>DZ</tr>
+            <tr><td>American Samoa</td><td>AS</tr>
+            <tr><td>Angola</td><td>AO</tr>
+            <tr><td>Anguilla</td><td>AI</tr>
+            <tr><td>Antarctica</td><td>AQ</tr>
+            <tr><td>Antigua and Barbuda</td><td>AG</tr>
+            <tr><td>Argentina</td><td>AR</tr>
+            <tr><td>Armenia</td><td>AM</tr>
+            <tr><td>Aruba</td><td>AW</tr>
+            <tr><td>Australia</td><td>AU</tr>
+            <tr><td>Austria</td><td>AT</tr>
+            <tr><td>Azerbaijan</td><td>AZ</tr>
+            <tr><td>Bahamas</td><td>BS</tr>
+            <tr><td>Bahrain</td><td>BH</tr>
+            <tr><td>Bangladesh</td><td>BD</tr>
+            <tr><td>Barbados</td><td>BB</tr>
+            <tr><td>Belarus</td><td>BY</tr>
+            <tr><td>Belgium</td><td>BE</tr>
+            <tr><td>Belize</td><td>BZ</tr>
+            <tr><td>Benin</td><td>BJ</tr>
+            <tr><td>Bermuda</td><td>BM</tr>
+            <tr><td>Bhutan</td><td>BT</tr>
+            <tr><td>Bolivia</td><td>BO</tr>
+            <tr><td>Bonaire</td><td>BQ</tr>
+            <tr><td>Bosnia and Herzegovina</td><td>BA</tr>
+            <tr><td>Botswana</td><td>BW</tr>
+            <tr><td>Brazil</td><td>BR</tr>
+            <tr><td>British Indian Ocean Territory</td><td>IO</tr>
+            <tr><td>British Virgin Islands</td><td>VG</tr>
+            <tr><td>Brunei Darussalam</td><td>BN</tr>
+            <tr><td>Bulgaria</td><td>BG</tr>
+            <tr><td>Burkina Faso</td><td>BF</tr>
+            <tr><td>Burundi</td><td>BI</tr>
+            <tr><td>Cambodia</td><td>KH</tr>
+            <tr><td>Cameroon</td><td>CM</tr>
+            <tr><td>Canada</td><td>CA</tr>
+            <tr><td>Cape Verde</td><td>CV</tr>
+            <tr><td>Cayman Islands</td><td>KY</tr>
+            <tr><td>Central African Republic</td><td>CF</tr>
+            <tr><td>Chad</td><td>TD</tr>
+            <tr><td>Chile</td><td>CL</tr>
+            <tr><td>China</td><td>CN</tr>
+            <tr><td>Christmas Island</td><td>CX</tr>
+            <tr><td>Cocos (Keeling) Islands</td><td>CC</tr>
+            <tr><td>Colombia</td><td>CO</tr>
+            <tr><td>Comoros</td><td>KM</tr>
+            <tr><td>Congo</td><td>CG</tr>
+            <tr><td>Cook Islands</td><td>CK</tr>
+            <tr><td>Costa Rica</td><td>CR</tr>
+            <tr><td>Croatia</td><td>HR</tr>
+            <tr><td>Cuba</td><td>CU</tr>
+            <tr><td>Cyprus</td><td>CY</tr>
+            <tr><td>Czech Republic</td><td>CZ</tr>
+            <tr><td>Denmark</td><td>DK</tr>
+            <tr><td>Djibouti</td><td>DJ</tr>
+            <tr><td>Dominica</td><td>DM</tr>
+            <tr><td>Dominican Republic</td><td>DO</tr>
+            <tr><td>Ecuador</td><td>EC</tr>
+            <tr><td>Egypt</td><td>EG</tr>
+            <tr><td>El Salvador</td><td>SV</tr>
+            <tr><td>Equatorial Guinea</td><td>GQ</tr>
+            <tr><td>Eritrea</td><td>ER</tr>
+            <tr><td>Estonia</td><td>EE</tr>
+            <tr><td>Ethiopia</td><td>ET</tr>
+            <tr><td>Falkland Islands</td><td>FK</tr>
+            <tr><td>Faroe Islands</td><td>FO</tr>
+            <tr><td>Fiji</td><td>FJ</tr>
+            <tr><td>Finland</td><td>FI</tr>
+            <tr><td>France</td><td>FR</tr>
+            <tr><td>French Guiana</td><td>GF</tr>
+            <tr><td>French Polynesia</td><td>PF</tr>
+            <tr><td>French Southern Territories</td><td>TF</tr>
+            <tr><td>Gabon</td><td>GA</tr>
+            <tr><td>Gambia</td><td>GM</tr>
+            <tr><td>Georgia</td><td>GE</tr>
+            <tr><td>Germany</td><td>DE</tr>
+            <tr><td>Ghana</td><td>GH</tr>
+            <tr><td>Gibraltar</td><td>GI</tr>
+            <tr><td>Great Britain/United Kingdom</td><td>GB</tr>
+            <tr><td>Greece</td><td>GR</tr>
+            <tr><td>Greenland</td><td>GL</tr>
+            <tr><td>Grenada</td><td>GD</tr>
+            <tr><td>Guadeloupe</td><td>GP</tr>
+            <tr><td>Guam</td><td>GU</tr>
+            <tr><td>Guatemala</td><td>GT</tr>
+            <tr><td>Guernsey</td><td>GG</tr>
+            <tr><td>Guinea</td><td>GN</tr>
+            <tr><td>Guinea-Bissau</td><td>GW</tr>
+            <tr><td>Guyana</td><td>GY</tr>
+            <tr><td>Haiti</td><td>HT</tr>
+            <tr><td>Heard Island and Mcdonald Islands</td><td>HM</tr>
+            <tr><td>Honduras</td><td>HN</tr>
+            <tr><td>Hong Kong</td><td>HK</tr>
+            <tr><td>Hungary</td><td>HU</tr>
+            <tr><td>Iceland</td><td>IS</tr>
+            <tr><td>India</td><td>IN</tr>
+            <tr><td>Indonesia</td><td>ID</tr>
+            <tr><td>Iran</td><td>IR</tr>
+            <tr><td>Iraq</td><td>IQ</tr>
+            <tr><td>Ireland</td><td>IE</tr>
+            <tr><td>Isle of Man</td><td>IM</tr>
+            <tr><td>Israel</td><td>IL</tr>
+            <tr><td>Italy</td><td>IT</tr>
+            <tr><td>Jamaica</td><td>JM</tr>
+            <tr><td>Japan</td><td>JP</tr>
+            <tr><td>Jersey</td><td>JE</tr>
+            <tr><td>Jordan</td><td>JO</tr>
+            <tr><td>Kazakhstan</td><td>KZ</tr>
+            <tr><td>Kenya</td><td>KE</tr>
+            <tr><td>Kiribati</td><td>KI</tr>
+            <tr><td>Kosovo</td><td>KS</tr>
+            <tr><td>Kuwait</td><td>KW</tr>
+            <tr><td>Kyrgyzstan</td><td>KG</tr>
+            <tr><td>Lao PDR</td><td>LA</tr>
+            <tr><td>Latvia</td><td>LV</tr>
+            <tr><td>Lebanon</td><td>LB</tr>
+            <tr><td>Lesotho</td><td>LS</tr>
+            <tr><td>Liberia</td><td>LR</tr>
+            <tr><td>Libya</td><td>LY</tr>
+            <tr><td>Liechtenstein</td><td>LI</tr>
+            <tr><td>Lithuania</td><td>LT</tr>
+            <tr><td>Luxembourg</td><td>LU</tr>
+            <tr><td>Macao</td><td>MO</tr>
+            <tr><td>Madagascar</td><td>MG</tr>
+            <tr><td>Malawi</td><td>MW</tr>
+            <tr><td>Malaysia</td><td>MY</tr>
+            <tr><td>Maldives</td><td>MV</tr>
+            <tr><td>Mali</td><td>ML</tr>
+            <tr><td>Malta</td><td>MT</tr>
+            <tr><td>Marshall Islands</td><td>MH</tr>
+            <tr><td>Martinique</td><td>MQ</tr>
+            <tr><td>Mauritania</td><td>MR</tr>
+            <tr><td>Mauritius</td><td>MU</tr>
+            <tr><td>Mayotte</td><td>YT</tr>
+            <tr><td>Mexico</td><td>MX</tr>
+            <tr><td>Micronesia</td><td>FM</tr>
+            <tr><td>Moldova</td><td>MD</tr>
+            <tr><td>Monaco</td><td>MC</tr>
+            <tr><td>Mongolia</td><td>MN</tr>
+            <tr><td>Montenegro</td><td>ME</tr>
+            <tr><td>Montserrat</td><td>MS</tr>
+            <tr><td>Morocco</td><td>MA</tr>
+            <tr><td>Mozambique</td><td>MZ</tr>
+            <tr><td>Myanmar</td><td>MM</tr>
+            <tr><td>Namibia</td><td>NA</tr>
+            <tr><td>Nauru</td><td>NR</tr>
+            <tr><td>Nepal</td><td>NP</tr>
+            <tr><td>Netherlands</td><td>NL</tr>
+            <tr><td>Netherlands Antilles</td><td>AN</tr>
+            <tr><td>New Caledonia</td><td>NC</tr>
+            <tr><td>New Zealand</td><td>NZ</tr>
+            <tr><td>Nicaragua</td><td>NI</tr>
+            <tr><td>Niger</td><td>NE</tr>
+            <tr><td>Nigeria</td><td>NG</tr>
+            <tr><td>Niue</td><td>NU</tr>
+            <tr><td>Norfolk Island</td><td>NF</tr>
+            <tr><td>North Korea</td><td>KP</tr>
+            <tr><td>North Macedonia</td><td>MK</tr>
+            <tr><td>Northern Mariana Islands</td><td>MP</tr>
+            <tr><td>Norway</td><td>NO</tr>
+            <tr><td>Oman</td><td>OM</tr>
+            <tr><td>Pakistan</td><td>PK</tr>
+            <tr><td>Palau</td><td>PW</tr>
+            <tr><td>Palestinian Territory</td><td>PS</tr>
+            <tr><td>Panama</td><td>PA</tr>
+            <tr><td>Papua New Guinea</td><td>PG</tr>
+            <tr><td>Paraguay</td><td>PY</tr>
+            <tr><td>Peru</td><td>PE</tr>
+            <tr><td>Philippines</td><td>PH</tr>
+            <tr><td>Pitcairn</td><td>PN</tr>
+            <tr><td>Poland</td><td>PL</tr>
+            <tr><td>Portugal</td><td>PT</tr>
+            <tr><td>Puerto Rico</td><td>PR</tr>
+            <tr><td>Qatar</td><td>QA</tr>
+            <tr><td>Romania</td><td>RO</tr>
+            <tr><td>Russian Federation</td><td>RU</tr>
+            <tr><td>Rwanda</td><td>RW</tr>
+            <tr><td>Saint Helena</td><td>SH</tr>
+            <tr><td>Saint Kitts and Nevis</td><td>KN</tr>
+            <tr><td>Saint Lucia</td><td>LC</tr>
+            <tr><td>Saint Pierre and Miquelon</td><td>PM</tr>
+            <tr><td>Saint Vincent and Grenadines</td><td>VC</tr>
+            <tr><td>Saint-Martin</td><td>MF</tr>
+            <tr><td>Saint-Martin</td><td>SX</tr>
+            <tr><td>Samoa</td><td>WS</tr>
+            <tr><td>San Marino</td><td>SM</tr>
+            <tr><td>Sao Tome and Principe</td><td>ST</tr>
+            <tr><td>Saudi Arabia</td><td>SA</tr>
+            <tr><td>Senegal</td><td>SN</tr>
+            <tr><td>Serbia</td><td>RS</tr>
+            <tr><td>Seychelles</td><td>SC</tr>
+            <tr><td>SGSSI</td><td>GS</tr>
+            <tr><td>Sierra Leone</td><td>SL</tr>
+            <tr><td>Singapore</td><td>SG</tr>
+            <tr><td>Slovakia</td><td>SK</tr>
+            <tr><td>Slovenia</td><td>SI</tr>
+            <tr><td>Solomon Islands</td><td>SB</tr>
+            <tr><td>Somalia</td><td>SO</tr>
+            <tr><td>South Africa</td><td>ZA</tr>
+            <tr><td>South Korea</td><td>KR</tr>
+            <tr><td>South Sudan</td><td>SS</tr>
+            <tr><td>Spain</td><td>ES</tr>
+            <tr><td>Sri Lanka</td><td>LK</tr>
+            <tr><td>Sudan</td><td>SD</tr>
+            <tr><td>Suriname</td><td>SR</tr>
+            <tr><td>Svalbard and Jan Mayen Islands</td><td>SJ</tr>
+            <tr><td>Swaziland</td><td>SZ</tr>
+            <tr><td>Sweden</td><td>SE</tr>
+            <tr><td>Switzerland</td><td>CH</tr>
+            <tr><td>Syria</td><td>SY</tr>
+            <tr><td>Taiwan</td><td>TW</tr>
+            <tr><td>Tajikistan</td><td>TJ</tr>
+            <tr><td>Tanzania</td><td>TZ</tr>
+            <tr><td>Thailand</td><td>TH</tr>
+            <tr><td>Timor-Leste</td><td>TL</tr>
+            <tr><td>Togo</td><td>TG</tr>
+            <tr><td>Tokelau</td><td>TK</tr>
+            <tr><td>Tonga</td><td>TO</tr>
+            <tr><td>Trinidad and Tobago</td><td>TT</tr>
+            <tr><td>Tunisia</td><td>TN</tr>
+            <tr><td>Turkey</td><td>TR</tr>
+            <tr><td>Turkmenistan</td><td>TM</tr>
+            <tr><td>Turks and Caicos Islands</td><td>TC</tr>
+            <tr><td>Tuvalu</td><td>TV</tr>
+            <tr><td>Uganda</td><td>UG</tr>
+            <tr><td>Ukraine</td><td>UA</tr>
+            <tr><td>United Arab Emirates</td><td>AE</tr>
+            <tr><td>United States of America</td><td>US</tr>
+            <tr><td>Uruguay</td><td>UY</tr>
+            <tr><td>US Minor Outlying Islands</td><td>UM</tr>
+            <tr><td>Uzbekistan</td><td>UZ</tr>
+            <tr><td>Vanuatu</td><td>VU</tr>
+            <tr><td>Vatican</td><td>VA</tr>
+            <tr><td>Venezuela</td><td>VE</tr>
+            <tr><td>Viet Nam</td><td>VN</tr>
+            <tr><td>Virgin Islands</td><td>VI</tr>
+            <tr><td>Wallis and Futuna Islands</td><td>WF</tr>
+            <tr><td>Western Sahara</td><td>EH</tr>
+            <tr><td>Yemen</td><td>YE</tr>
+            <tr><td>Zaire</td><td>CD</tr>
+            <tr><td>Zambia</td><td>ZM</tr>
+            <tr><td>Zimbabwe</td><td>ZW</tr>
+            
+    </table>
+        
+
+
+</body>
+</html>
