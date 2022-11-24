@@ -48,18 +48,8 @@ Data elements eventually used for Machine Learning model, step by step:
         - Output to be fed to weather API: Tuple containing Latitude and Longitude for one geographic location.
 - Weather API:
     - Input: Latitude and Longitude for one geographic location, extracted from API based on user input.
-    - Output: Selected weather data points from Historical Weather API (https://open-meteo.com/en/docs/historical-weather-api) based on Latitude and Longitude:
-    - Output data elements being tested: 
-        - Hourly data. Currently testing with:
-           - 'time',
-           - 'temperature_2m_degF', 
-           - 'relativehumidity_2m_perc', 
-           - 'rain_inch',
-           - 'snowfall_cm', 
-           - 'cloudcover_perc', 
-           - 'windspeed_10m_mph',
-           - 'winddirection_10m_deg'
-        - Daily data. No tests yet. Stand by.
+    - Output: Selected weather data points from Historical Weather API (https://open-meteo.com/en/docs/historical-weather-api) based on Latitude and Longitude.
+    
     - Output categories created from the cleaned API data, to be fed into the Machine Learning models. Some can be used as direct averages or sums, others will be transformed into “pivot table” formats of several sub-categories for the levels of intensity. (For example: Raininess levels by day: “No Rain”/”Light Rain”/”Heavy Rain” where each column contains 1 or 0 for True/False.)
         - Temperature levels by day
         - Humidity levels by day
