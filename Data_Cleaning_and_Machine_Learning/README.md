@@ -1,7 +1,7 @@
 
 # Weather_Data_Analysis
-=======
-# MAchine-learning seasons for Weather_Data_Analysis
+
+## Machine-learning seasons for Weather_Data_Analysis
 
 
  Daily weather data is aggreated into approximately 10-day blocks like "early march" or "late february" or "mid-june". Averages *and standard deviations* of some weather statistics are computed for each block, for each year. This data, with one row for each block in each year in the historical record, is then fed into PCA and then K-Means clustering, to produce a label for each row. Our model's first guess for the labels for each of the 36 date blocks is the modes of the labels across the years; an ad-hoc smoothing procedure is then applied to produce meaningful contiguous seasons, while changing as little as possible. We run several models, and then automatically picked the one that produced the nicest-looking results with the least amount of ad-hoc smoothing.
